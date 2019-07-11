@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import '../styles/default.css';
 import Header from '../components/header';
+import Navbar from '../components/navbar';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -36,14 +37,15 @@ const Nav = styled.div`
 const Layout = props => {
   return (
     <Container>
-      <Nav>
+      {/* <Nav>
         <Header />
-      </Nav>
-      <Page>
+      </Nav> */}
+      <Navbar />
+      {/* <Page>
         <Content>
           {props.children}
         </Content>
-      </Page>
+      </Page> */}
     </Container>
   );
 }

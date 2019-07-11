@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
 const Nav = styled.nav`
-  /* background-color: red; */
   display: flex;
   justify-content: center;
   position: relative;
@@ -14,7 +13,6 @@ const Menu = styled.ul`
   display: flex;
   justify-content: center;
   margin: 0;
-  /* position: relative; */
 `;
 
 const Item = styled.li`
@@ -32,7 +30,6 @@ const Holder = styled.div`
   top: 100%;
   visibility: ${props => props.isVisible ? 'visible' : 'hidden'}; */
   opacity: ${props => props.isVisible ? '1' : '0'};
-  transition: 0.3s;
   will-change: opacity;
 `;
 
@@ -43,15 +40,14 @@ const Content = styled.div`
   box-shadow: 0 3px 20px rgba(0, 0, 0, 0.4);
   transform-origin: left top;
   will-change: transform;
-  /* transform: translate(377.421875px) scale(0.7, 1.882734375); */
   transform: ${props => {
-    // console.log(props);
     return props.dimensions
     && props.dimensions.left
     && props.dimensions.scaleX
     && props.dimensions.scaleY
     && `translate(${props.dimensions.left}px) scale(${props.dimensions.scaleX}, ${props.dimensions.scaleY})`
   }};
+  transition: ${props => props.isVisible ? '0.3s' : '0.1s'};
 `;
 
 const Panel = styled.ul`
@@ -64,7 +60,7 @@ const Panel = styled.ul`
   padding: 1rem 1rem 0 1rem;
   visibility: hidden;
   opacity: 0;
-  transition: 0.3s;
+  transition: 0.2s;
   width: ${props => props.wide ? '30rem' : '20rem'};
   li {
     color: #555;
@@ -88,16 +84,16 @@ const Panel = styled.ul`
   &.is-visible {
     visibility: visible;
     opacity: 1;
+    transition: 0.6s;
   }
   &:before {
-    /* TODO: NEED TO GET RID OF TOP BORDER */
     content: '';
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
     border: 10px solid transparent;
-    border-bottom-color: #FFFFFF;
+    border-bottom-color: white;
     margin: 0;
     padding: 0;
   }
@@ -113,10 +109,8 @@ const reveal = (e, setIsVisible, setDimensions) => {
   const defaultDimensions = { width: 300, height: 200 };
   const panel = e.currentTarget.querySelector('ul');
   const panelRect = panel.getBoundingClientRect();
-  console.log(panel)
   const scaleX = panelRect.width / defaultDimensions.width;
   const scaleY = panelRect.height / defaultDimensions.height;
-  console.log(panelRect)
   const { left } = panelRect;
   setDimensions({
     scaleX,
@@ -133,7 +127,7 @@ const Navbar = () => {
   return (
     <Nav>
       <Holder isVisible={isVisible}>
-        <Content dimensions={dimensions}></Content>
+        <Content dimensions={dimensions} isVisible={isVisible}></Content>
       </Holder>
       <Menu>
         <Item

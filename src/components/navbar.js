@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'gatsby';
 
 const Nav = styled.nav`
   display: flex;
@@ -18,10 +19,6 @@ const Menu = styled.ul`
 const Item = styled.li`
   margin: 0 1rem;
   position: relative;
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
 `;
 
 const Holder = styled.div`
@@ -37,7 +34,7 @@ const Content = styled.div`
   width: 300px;
   height: 200px;
   background: white;
-  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.1);
   transform-origin: left top;
   will-change: transform;
   transform: ${props => {
@@ -99,6 +96,28 @@ const Panel = styled.ul`
   }
 `;
 
+const Logo = styled.h1`
+  font-family: 'Yantramanav';
+  font-size: 1.25rem;
+  margin: 0;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  padding: 0.125rem 1rem;
+  &:hover {
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+  }
+  transition: 0.5s;
+`;
+
+const StyledLink = styled(Link)`
+  border-bottom: 1px solid transparent;
+  text-decoration: none;
+  color: inherit;
+`;
+
 const hide = (e, setIsVisible) => {
   const panel = e.currentTarget.querySelector('ul');
   panel.classList.remove('is-visible');
@@ -130,17 +149,24 @@ const Navbar = () => {
         <Content dimensions={dimensions} isVisible={isVisible}></Content>
       </Holder>
       <Menu>
+        <Item>
+          <StyledLink to="/">
+            <Logo>
+              JSU
+            </Logo>
+          </StyledLink>
+        </Item>
         <Item
           onMouseEnter={e => reveal(e, setIsVisible, setDimensions)}
           onMouseLeave={e => hide(e, setIsVisible)}
         >
-          <a href="#">Courses</a>
+          <StyledLink to="/courses">Courses</StyledLink>
           <Panel wide>
             <li>
-              <a href="#">
+              <StyledLink href="#">
                 <h2>Intro</h2>
                 <p>This is where you can go through some basics</p>
-              </a>
+              </StyledLink>
             </li>
             <li>
               <h2>Complex</h2>
@@ -152,7 +178,7 @@ const Navbar = () => {
           onMouseEnter={e => reveal(e, setIsVisible, setDimensions)}
           onMouseLeave={e => hide(e, setIsVisible)}
         >
-          <a href="#">Blog</a>
+          <StyledLink to="/blogs">Blog</StyledLink>
           <Panel>
             <li>
               <h2>Intro</h2>
@@ -171,6 +197,9 @@ const Navbar = () => {
               <p>This is whesd gds dgsd gds gd sg ds gsd  sgddgs gds dgsdg re you can go through some complex concepts</p>
             </li>
           </Panel>
+        </Item>
+        <Item>
+          <StyledLink to="/support">Support Educator</StyledLink>
         </Item>
       </Menu>
     </Nav>

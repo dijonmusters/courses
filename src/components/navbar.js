@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-const netlifyIdentity = require("netlify-identity-widget");
+import netlifyIdentity from 'netlify-identity-widget';
 import { Link } from 'gatsby';
 
 const Nav = styled.nav`
@@ -141,6 +141,10 @@ const reveal = (e, setIsVisible, setDimensions) => {
   setIsVisible(true);
 }
 
+const handleLogin = () => {
+  netlifyIdentity.open();
+}
+
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [dimensions, setDimensions] = useState({});
@@ -167,7 +171,7 @@ const Navbar = () => {
           <StyledLink to="/courses">Courses</StyledLink>
           <Panel wide>
             <li>
-              <StyledLink href="#">
+              <StyledLink to="/">
                 <h2>Intro</h2>
                 <p>This is where you can go through some basics</p>
               </StyledLink>
@@ -205,8 +209,8 @@ const Navbar = () => {
         <Item>
           <StyledLink to="/support">Support Educator</StyledLink>
         </Item>
-        <Item>
-          <div data-netlify-identity-menu></div>
+        <Item onClick={handleLogin}>
+          Login
         </Item>
       </Menu>
     </Nav>

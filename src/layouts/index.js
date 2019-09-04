@@ -1,5 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import netlifyIdentity from 'netlify-identity-widget';
+import { getApolloClient } from '../utils/apollo';
+// import { ApolloClient } from 'apollo-client';
+// import { createHttpLink } from 'apollo-link-http';
+// import { setContext } from 'apollo-link-context';
+// import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloProvider } from '@apollo/react-hooks';
 import '../styles/default.css';
 import Navbar from '../components/navbar';
 
@@ -26,17 +33,30 @@ const Content = styled.div`
   margin-bottom: 0.5rem;
 `;
 
+const initApollo = async setClient => {
+  const client = await getApolloClient();
+  setClient(client);
+}
+
 const Layout = props => {
-  return (
-    <Container>
-      <Navbar />
-      <Page>
-        <Content>
-          {props.children}
-        </Content>
-      </Page>
-    </Container>
-  );
+  const [client, setClient] = useState(null);
+  useEffect(() => {
+    netlifyIdentity.init();
+    initApollo(setClient);
+  }, []);
+
+  return client ? (
+    <ApolloProvider client={client}>
+      <Container>
+        <Navbar />
+        <Page>
+          <Content>
+            {props.children}
+          </Content>
+        </Page>
+      </Container>
+    </ApolloProvider>
+  ) : null;
 }
 
 export default Layout;

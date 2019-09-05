@@ -9,6 +9,7 @@ import { getApolloClient } from '../utils/apollo';
 import { ApolloProvider } from '@apollo/react-hooks';
 import '../styles/default.css';
 import Navbar from '../components/navbar';
+import axios from 'axios';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -33,20 +34,21 @@ const Content = styled.div`
   margin-bottom: 0.5rem;
 `;
 
-const initApollo = async setClient => {
-  const client = await getApolloClient();
-  setClient(client);
-}
+// const initApollo = async setClient => {
+//   const client = await getApolloClient();
+//   setClient(client);
+// }
 
 const Layout = props => {
   const [client, setClient] = useState(null);
+  const [test, setTest] = useState();
+  console.log(`test: ${test}`);
   useEffect(() => {
     netlifyIdentity.init();
-    initApollo(setClient);
+    // initApollo(setClient);
   }, []);
 
-  return client ? (
-    <ApolloProvider client={client}>
+  return (
       <Container>
         <Navbar />
         <Page>
@@ -55,8 +57,7 @@ const Layout = props => {
           </Content>
         </Page>
       </Container>
-    </ApolloProvider>
-  ) : null;
+  );
 }
 
 export default Layout;

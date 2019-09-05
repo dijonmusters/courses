@@ -1,33 +1,38 @@
-import { ApolloClient, ApolloLink, InMemoryCache, HttpLink } from 'apollo-boost';
-import netlifyIdentity from 'netlify-identity-widget';
-import fetch from 'node-fetch';
+import ApolloClient, { ApolloLink, InMemoryCache, HttpLink } from 'apollo-boost';
+import { currentUser as getCurrentUser } from 'netlify-identity-widget';
+import fetch from 'isomorphic-fetch';
 
-const getHeaders = async () => {
-  const headers = { "Content-Type": "application/json" };
-  if (netlifyIdentity.currentUser()) {
-    const token = await netlifyIdentity.currentUser().jwt();
-    return { ...headers, Authorization: `Bearer ${token}` };
+const isClient = typeof window !== 'undefined';
+
+const getAuthHeaders = async () => {
+  const user = getCurrentUser && getCurrentUser();
+  if (user) {
+    const token = await user.jwt();
+    return { Authorization: `Bearer ${token}` };
   }
-  return headers;
+  return {};
 }
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:9000/graphql',
+  uri: `${isClient && window.location.origin}/.netlify/functions/graphql`,
   fetch
 });
 
 const getApolloClient = async () => {
-  const headers = await getHeaders();
+  if (isClient) {
+    const headers = await getAuthHeaders();
 
-  const authLink = new ApolloLink((operation, forward) => {
-    operation.setContext({ headers });
-    return forward(operation);
-  });
+    const authLink = new ApolloLink((operation, forward) => {
+      operation.setContext({ headers });
+      return forward(operation);
+    });
 
-  return new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache()
-  });
+    return new ApolloClient({
+      link: authLink.concat(httpLink),
+      cache: new InMemoryCache()
+    });
+  }
+  return null;
 }
 
 export { getApolloClient };

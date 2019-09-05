@@ -63,7 +63,7 @@ const rebuildCoursesResolver = async (root, args, context) => {
   await connectDb();
   console.log('connected')
   const course = await Course.findOne({ code });
-  console.log('found', JSON.stringify(course))
+  console.log('found', JSON.stringify(course));
   return course;
 }
 

@@ -11,8 +11,6 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start:app": "npm run develop",
     "start:functions": "netlify-lambda serve functions",
-    "bootstrap": "node ./scripts/bootstrap-fauna-database.js",
-    "prebuild": "echo 'setup faunaDB' && npm run bootstrap",
     "build:app": "gatsby build",
     "build:functions": "netlify-lambda build functions",
     "serve": "gatsby serve",
@@ -39,11 +37,13 @@
     "gatsby-remark-images": "^3.1.0",
     "gatsby-source-filesystem": "^2.1.0",
     "graphql": "^14.5.4",
+    "isomorphic-fetch": "^2.2.1",
     "mongoose": "^5.6.11",
     "netlify-identity-widget": "^1.5.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "subscriptions-transport-ws": "^0.9.16"
   },
   "devDependencies": {
     "netlify-lambda": "^1.6.3",

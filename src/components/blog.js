@@ -26,15 +26,13 @@ const Blog = ({ frontmatter, body }) => {
   return (
     <>
       <Title>
-        <Bordered>
-          {title}
-        </Bordered>
+        <Bordered>{title}</Bordered>
       </Title>
       <Body>
         <MDXRenderer {...frontmatter}>{body}</MDXRenderer>
       </Body>
     </>
   );
-}
+};
 
 export default Blog;

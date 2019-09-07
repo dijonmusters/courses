@@ -1,29 +1,24 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "learn-web-dev",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "A course platform for web development courses",
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "start": "npm-run-all --parallel start:app start:functions",
+    "start": "npm-run-all --parallel start:**",
     "build": "npm-run-all --parallel build:**",
-    "develop": "gatsby develop",
-    "format": "prettier --write src/**/*.{js,jsx}",
-    "start:app": "npm run develop",
-    "start:functions": "netlify-lambda serve functions",
+    "start:app": "gatsby develop",
     "build:app": "gatsby build",
+    "start:functions": "netlify-lambda serve functions",
     "build:functions": "netlify-lambda build functions",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "format": "prettier --write src/**/*.{js,jsx}"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.0.1",
     "@mdx-js/mdx": "^1.0.21",
     "@mdx-js/react": "^1.0.21",
     "apollo-boost": "^0.4.4",
-    "apollo-cache-inmemory": "^1.6.3",
-    "apollo-link-context": "^1.0.18",
-    "apollo-link-http": "^1.5.15",
     "apollo-server-lambda": "^2.9.3",
     "axios": "^0.19.0",
     "babel-plugin-styled-components": "^1.10.1",
@@ -42,8 +37,7 @@
     "netlify-identity-widget": "^1.5.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "styled-components": "^4.3.2",
-    "subscriptions-transport-ws": "^0.9.16"
+    "styled-components": "^4.3.2"
   },
   "devDependencies": {
     "netlify-lambda": "^1.6.3",

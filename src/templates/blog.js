@@ -3,8 +3,14 @@ import { graphql } from 'gatsby';
 import Blog from '../components/blog';
 
 const BlogTemplate = ({
-  data: { mdx: { frontmatter, frontmatter: { title }, code: { body }} }
-  }) => <Blog frontmatter={frontmatter} body={body}/>;
+  data: {
+    mdx: {
+      frontmatter,
+      frontmatter: { title },
+      code: { body },
+    },
+  },
+}) => <Blog frontmatter={frontmatter} body={body} />;
 
 export const pageQuery = graphql`
   query oneBlogQuery($id: String!) {

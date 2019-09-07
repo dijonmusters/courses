@@ -12,7 +12,7 @@ const Red = styled.div`
 `;
 
 const FullWidth = props => {
-  return <Red>{props.children}</Red>
-}
+  return <Red>{props.children}</Red>;
+};
 
 export default FullWidth;

@@ -1,15 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import netlifyIdentity from 'netlify-identity-widget';
-import { getApolloClient } from '../utils/apollo';
-// import { ApolloClient } from 'apollo-client';
-// import { createHttpLink } from 'apollo-link-http';
-// import { setContext } from 'apollo-link-context';
-// import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloProvider } from '@apollo/react-hooks';
 import '../styles/default.css';
 import Navbar from '../components/navbar';
-import axios from 'axios';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -34,30 +26,13 @@ const Content = styled.div`
   margin-bottom: 0.5rem;
 `;
 
-// const initApollo = async setClient => {
-//   const client = await getApolloClient();
-//   setClient(client);
-// }
-
-const Layout = props => {
-  const [client, setClient] = useState(null);
-  const [test, setTest] = useState();
-  console.log(`test: ${test}`);
-  useEffect(() => {
-    netlifyIdentity.init();
-    // initApollo(setClient);
-  }, []);
-
-  return (
-      <Container>
-        <Navbar />
-        <Page>
-          <Content>
-            {props.children}
-          </Content>
-        </Page>
-      </Container>
-  );
-}
+const Layout = props => (
+  <Container>
+    <Navbar />
+    <Page>
+      <Content>{props.children}</Content>
+    </Page>
+  </Container>
+);
 
 export default Layout;

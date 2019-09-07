@@ -20,7 +20,12 @@ const Title = styled.h2`
 const Index = props => (
   <Container>
     <Title>JavaScript University</Title>
-    <Paragraph>JSU is a place to learn new things about JavaScript, or perhaps refresh some old things that are beginning to fade. The majority of content is free and designed to be as accessible as possible to the most amount of people!</Paragraph>
+    <Paragraph>
+      JSU is a place to learn new things about JavaScript, or perhaps refresh
+      some old things that are beginning to fade. The majority of content is
+      free and designed to be as accessible as possible to the most amount of
+      people!
+    </Paragraph>
   </Container>
 );
 

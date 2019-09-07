@@ -19,18 +19,22 @@ const BlogContainer = styled.div`
 `;
 
 const renderBlog = ({
-  node: { id, frontmatter, code: { body }}
+  node: {
+    id,
+    frontmatter,
+    code: { body },
+  },
 }) => (
   <BlogContainer key={id}>
     <Blog frontmatter={frontmatter} body={body} />
   </BlogContainer>
 );
 
-const Blogs = ({ data: { allMdx: { edges }}}) => (
-  <Container>
-    {edges.map(renderBlog)}
-  </Container>
-);
+const Blogs = ({
+  data: {
+    allMdx: { edges },
+  },
+}) => <Container>{edges.map(renderBlog)}</Container>;
 
 export const pageQuery = graphql`
   query blogList {

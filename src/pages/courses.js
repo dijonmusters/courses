@@ -3,7 +3,9 @@ import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 
 const renderCourse = course => (
-  <p key={course.code}>{course.code}: {course.title}</p>
+  <p key={course.code}>
+    {course.code}: {course.title}
+  </p>
 );
 
 const Courses = () => {
@@ -17,8 +19,8 @@ const Courses = () => {
   `);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-  console.log(data)
+  console.log(data);
   return data.courses.map(renderCourse);
-}
+};
 
 export default Courses;

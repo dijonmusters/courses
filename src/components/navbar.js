@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import netlifyIdentity from 'netlify-identity-widget';
 import { Link } from 'gatsby';
@@ -26,8 +26,8 @@ const Holder = styled.div`
   position: absolute;
   left: 0;
   top: 100%;
-  visibility: ${props => props.isVisible ? 'visible' : 'hidden'}; */
-  opacity: ${props => props.isVisible ? '1' : '0'};
+  visibility: ${props => (props.isVisible ? 'visible' : 'hidden')};
+  */opacity: ${props => (props.isVisible ? '1' : '0')};
   will-change: opacity;
 `;
 
@@ -39,13 +39,15 @@ const Content = styled.div`
   transform-origin: left top;
   will-change: transform;
   transform: ${props => {
-    return props.dimensions
-    && props.dimensions.left
-    && props.dimensions.scaleX
-    && props.dimensions.scaleY
-    && `translate(${props.dimensions.left}px) scale(${props.dimensions.scaleX}, ${props.dimensions.scaleY})`
+    return (
+      props.dimensions &&
+      props.dimensions.left &&
+      props.dimensions.scaleX &&
+      props.dimensions.scaleY &&
+      `translate(${props.dimensions.left}px) scale(${props.dimensions.scaleX}, ${props.dimensions.scaleY})`
+    );
   }};
-  transition: ${props => props.isVisible ? '0.3s' : '0.1s'};
+  transition: ${props => (props.isVisible ? '0.3s' : '0.1s')};
 `;
 
 const Panel = styled.ul`
@@ -59,7 +61,7 @@ const Panel = styled.ul`
   visibility: hidden;
   opacity: 0;
   transition: 0.2s;
-  width: ${props => props.wide ? '30rem' : '20rem'};
+  width: ${props => (props.wide ? '30rem' : '20rem')};
   li {
     color: #555;
     padding: 1rem 0 0.5rem 0;
@@ -123,7 +125,7 @@ const hide = (e, setIsVisible) => {
   const panel = e.currentTarget.querySelector('ul');
   panel.classList.remove('is-visible');
   setIsVisible(false);
-}
+};
 
 const reveal = (e, setIsVisible, setDimensions) => {
   const defaultDimensions = { width: 300, height: 200 };
@@ -135,22 +137,19 @@ const reveal = (e, setIsVisible, setDimensions) => {
   setDimensions({
     scaleX,
     scaleY,
-    left
+    left,
   });
   panel.classList.add('is-visible');
   setIsVisible(true);
-}
+};
 
 const handleLogin = () => {
   netlifyIdentity.open();
-}
+};
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [dimensions, setDimensions] = useState({});
-  useEffect(() => {
-    netlifyIdentity.init();
-  }, []);
   return (
     <Nav>
       <Holder isVisible={isVisible}>
@@ -159,9 +158,7 @@ const Navbar = () => {
       <Menu>
         <Item>
           <StyledLink to="/">
-            <Logo>
-              JSU
-            </Logo>
+            <Logo>JSU</Logo>
           </StyledLink>
         </Item>
         <Item
@@ -194,7 +191,10 @@ const Navbar = () => {
             </li>
             <li>
               <h2>More Complex</h2>
-              <p>This is whesd gds dgsd gds gd sg ds gsd  sgddgs gds dgsdg re you can go through some complex concepts</p>
+              <p>
+                This is whesd gds dgsd gds gd sg ds gsd sgddgs gds dgsdg re you
+                can go through some complex concepts
+              </p>
             </li>
             <li>
               <h2>Intro</h2>
@@ -202,19 +202,20 @@ const Navbar = () => {
             </li>
             <li>
               <h2>More Complex</h2>
-              <p>This is whesd gds dgsd gds gd sg ds gsd  sgddgs gds dgsdg re you can go through some complex concepts</p>
+              <p>
+                This is whesd gds dgsd gds gd sg ds gsd sgddgs gds dgsdg re you
+                can go through some complex concepts
+              </p>
             </li>
           </Panel>
         </Item>
         <Item>
           <StyledLink to="/support">Support Educator</StyledLink>
         </Item>
-        <Item onClick={handleLogin}>
-          Login
-        </Item>
+        <Item onClick={handleLogin}>Login</Item>
       </Menu>
     </Nav>
   );
-}
+};
 
 export default Navbar;

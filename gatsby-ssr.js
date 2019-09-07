@@ -1,1 +1,6 @@
-export { wrapRootElement } from './src/apollo/wrap-root-element';
+import React from "react"
+import Provider from './src/apollo/provider'
+
+export const wrapRootElement = ({ element }) => (
+  <Provider>{element}</Provider>
+);

@@ -9,7 +9,11 @@ const host = isClient
 
 const uri = `${host}/.netlify/functions/graphql`;
 
-export const client = new ApolloClient({
-  uri,
-  fetch,
-});
+const getClient = async () => {
+  return new ApolloClient({
+    uri,
+    fetch,
+  });
+}
+
+export { getClient }

@@ -1,22 +1,24 @@
 const { gql } = require('apollo-server-lambda');
 
 const types = gql`
+  type Course {
+    code: String!,
+    title: String!,
+    description: String,
+    difficulty: String
+  }
   type Download {
     title: String,
     url: String
   }
-  type Course {
-    code: String,
-    title: String,
+  type Lesson {
+    courseCode: String!,
+    moduleName: String!,
+    title: String!,
+    body: String!,
+    slug: String!,
     videoUrl: String,
-    downloads: [Download],
-    body: String
-  }
-`;
-
-const queries = gql`
-  type Query {
-    courses: [Course]
+    downloads: [Download]
   }
 `;
 
@@ -25,21 +27,34 @@ const inputs = gql`
     title: String,
     url: String
   }
-  input CourseInput {
-    code: String!,
+  input LessonInput {
+    courseCode: String!,
+    moduleName: String!,
     title: String!,
+    body: String!,
+    slug: String!,
     videoUrl: String,
-    downloads: [DownloadInput],
-    body: String
+    downloads: [DownloadInput]
   }
-  input CoursesInput {
-    courses: [CourseInput]!
+  input LessonsInput {
+    lessons: [LessonInput]!
+  }
+  input LessonName {
+    lessonName: String!
+  }
+`;
+
+const queries = gql`
+  type Query {
+    courses: [Course],
+    lessons: [Lesson],
+    lesson(input: LessonName!): Lesson
   }
 `;
 
 const mutations = gql`
   type Mutation {
-    courses(input: CoursesInput!): [Course]
+    lessons(input: LessonsInput!): [Lesson]
   }
 `;
 

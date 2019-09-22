@@ -27,7 +27,7 @@ const Holder = styled.div`
   left: 0;
   top: 100%;
   visibility: ${props => (props.isVisible ? 'visible' : 'hidden')};
-  */opacity: ${props => (props.isVisible ? '1' : '0')};
+  opacity: ${props => (props.isVisible ? '1' : '0')};
   will-change: opacity;
 `;
 

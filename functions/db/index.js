@@ -1,5 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
+const Lesson = require('./models/Lesson');
 const Course = require('./models/Course');
 
 const connectDb = async () => {
@@ -12,7 +13,7 @@ const connectDb = async () => {
       console.log(error);
     }
   }
-  return { Course };
+  return { Course, Lesson };
 }
 
 module.exports = { connectDb };

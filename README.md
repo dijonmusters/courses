@@ -14,7 +14,7 @@ Every course - both free and paid - is designed to build your problem solving sk
 
 ### Registering a new account
 
-There is no need to create yet another account (and reuse that same password now that Lastpass is charging!), as Courses uses social sign on. This means you can use an existing GitHub, Google or Twitter.
+There is no need to create yet another account (and reuse that same password now that Lastpass is charging!), as Courses uses social sign on. This means you can use your existing GitHub, Google or Twitter account.
 
 There is no need to enter credit card details for a free account, which will give you access to an impressively large, curated collection of free courses!
 
@@ -28,13 +28,15 @@ This is your space! You can look at all the awesome premium courses you have pur
 
 ### Buy premium course
 
-Like the look of a single premium course, but not yet ready to commit? That is totally fine! You can purchase a single course and own access to it forever!
+Like the look of a single premium course, but not yet ready to commit to a full on subscription? That is totally fine! You can purchase a single course and own access to it forever!
 
 Really enjoy what you learnt? Subscribe to access every course!
 
 ### Subscribe
 
 By subscribing on a monthly or yearly basis, you will unlock access to all the premium courses! Cancel anytime!
+
+This is the most cost-effective option, as it costs the same price as a single course, but gives you access to the whole library!
 
 ### Unsubscribe
 
@@ -44,6 +46,8 @@ It's really good content! But it's only good if we're both enjoying it!
 
 ## Educator
 
-![profile picture](https://avatars.githubusercontent.com/u/13792200?s=400&u=a4fe6e9e2a155e1f8e88cc261583c116d953d491&v=4)
+<div align="center">
+  <img src="https://avatars.githubusercontent.com/u/13792200?s=400&u=a4fe6e9e2a155e1f8e88cc261583c116d953d491&v=4" />
+</div>
 
 Hey! I am Jon Meyers. I create all the "courses" offered on Courses. I work as a software developer and educator during work hours, and then switch off to hang out with my awesome daughter!

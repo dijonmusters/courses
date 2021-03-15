@@ -1,0 +1,35 @@
+{
+  "name": "courses",
+  "version": "1.0.0",
+  "description": "A video tutorial platform for beginner software developers",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dijonmusters/courses.git"
+  },
+  "author": "Jon Meyers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dijonmusters/courses/issues"
+  },
+  "homepage": "https://github.com/dijonmusters/courses#readme",
+  "dependencies": {
+    "@prisma/client": "^2.18.0",
+    "axios": "^0.21.1",
+    "next": "^10.0.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.4",
+    "postcss": "^8.2.6",
+    "prisma": "^2.18.0",
+    "tailwindcss": "^2.0.3"
+  }
+}

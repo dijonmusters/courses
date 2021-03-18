@@ -1,26 +1,17 @@
+import superjson from 'superjson'
 import CourseList from 'components/CourseList'
-import axios from 'axios'
-
-// const base = process.env.NEXT_PUBLIC_API_BASE
-// const isDev = process.env.NODE_ENV === 'development'
-
-// const host =
-//   process.env.NODE_ENV === 'development'
-//     ? 'http://localhost:3000'
-//     : 'https://jonmeyers.io'
+import { getCourses } from '../utils/db'
 
 const Index = ({ courses }) => {
   return <CourseList courses={courses} />
 }
 
 export const getStaticProps = async () => {
-  const { data: courses } = await axios.get(`/api/get-courses`)
-
-  console.log(courses)
+  const data = await getCourses()
 
   return {
     props: {
-      courses,
+      courses: superjson.stringify(data),
     },
   }
 }

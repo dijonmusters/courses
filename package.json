@@ -21,10 +21,10 @@
   "homepage": "https://github.com/dijonmusters/courses#readme",
   "dependencies": {
     "@prisma/client": "^2.18.0",
-    "axios": "^0.21.1",
     "next": "^10.0.7",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "superjson": "^1.7.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.4",

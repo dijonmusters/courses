@@ -1,4 +1,3 @@
-import superjson from 'superjson'
 import CourseList from 'components/CourseList'
 import { getCourses } from '../utils/db'
 
@@ -11,7 +10,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      courses: superjson.stringify(data),
+      courses: JSON.parse(JSON.stringify(data)),
     },
   }
 }

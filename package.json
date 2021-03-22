@@ -22,9 +22,12 @@
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.2.0",
     "@prisma/client": "^2.18.0",
+    "@stripe/stripe-js": "^1.13.1",
+    "axios": "^0.21.1",
     "next": "^10.0.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "stripe": "^8.138.0",
     "superjson": "^1.7.3"
   },
   "devDependencies": {

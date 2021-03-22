@@ -8,4 +8,9 @@ const getCourses = () =>
     },
   })
 
-export { getCourses }
+const createUser = (email) =>
+  prisma.user.create({
+    data: { email },
+  })
+
+export { getCourses, createUser }

@@ -7,11 +7,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Subscription {
+  id        Int      @id @default(autoincrement())
+  status    Status   @default(INACTIVE)
+  stripeId  String?
+  createdAt DateTime @default(now())
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  createdAt    DateTime      @default(now())
+  subscription Subscription?
+  courses      Course[]
+}
+
 model Course {
   id        Int      @id @default(autoincrement())
   title     String   @unique
   createdAt DateTime @default(now())
   lessons   Lesson[]
+  users     User[]
 }
 
 model Lesson {
@@ -20,4 +38,9 @@ model Lesson {
   courseId  Int
   createdAt DateTime @default(now())
   course    Course   @relation(fields: [courseId], references: [id])
+}
+
+enum Status {
+  INACTIVE
+  ACTIVE
 }

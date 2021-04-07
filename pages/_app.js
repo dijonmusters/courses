@@ -6,7 +6,7 @@ import Nav from 'components/Nav'
 const MyApp = ({ Component, pageProps }) => {
   return (
     <UserProvider>
-      <div className="min-h-screen p-6 flex flex-col items-center justify-center bg-indigo-400 text-white">
+      <div className="min-h-screen w-full flex flex-col bg-indigo-400 text-white">
         <Nav />
         <Component {...pageProps} />
       </div>

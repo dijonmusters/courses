@@ -27,6 +27,7 @@
     "next": "^10.0.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-player": "^2.9.0",
     "stripe": "^8.138.0",
     "superjson": "^1.7.3"
   },

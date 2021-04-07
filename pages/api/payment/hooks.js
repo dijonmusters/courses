@@ -1,3 +1,5 @@
+import { enrolUser, subscribeUser, cancelSubscription } from 'utils/db'
+
 const mapIntervalToEnum = (interval) => {
   switch (interval) {
     case 'month':
@@ -11,25 +13,23 @@ const mapIntervalToEnum = (interval) => {
 
 module.exports = async (req, res) => {
   const { type } = req.body
-  const { userId, courseId } = req?.body?.data?.object?.metadata
 
   switch (type) {
     case 'charge.succeeded':
-      console.log(req.body)
-
-      // update user -> courses to contain courseId
-      console.log('charge successful!')
-      break
+      const { userId, courseId } = req?.body?.data?.object?.metadata
+      if (courseId) {
+        const enrolledUser = await enrolUser(parseInt(userId), parseInt(courseId))
+        console.log(`${enrolledUser.email} enrolled in ${enrolledUser.courses.find(c => c.id === parseInt(courseId)).title}`)
+        break
+      }
     case 'customer.subscription.created':
-      const interval = req?.body?.data?.object?.plan?.interval
-      console.log(interval)
-      console.log(mapIntervalToEnum(interval))
+      const subscribedUser = await subscribeUser(req?.body?.data?.object?.customer)
+      console.log(`${subscribedUser.email} subscribed`)
+      break
+    case 'customer.subscription.deleted':
+      const cancelledUser = await cancelSubscription(req?.body?.data?.object?.customer)
+      console.log(`${cancelledUser.email} subscription expired`)
 
-      console.log('subscription successful!')
-      // console.log(JSON.stringify(req.body, null, 2))
-      // console.log(userId)
-
-      // update user -> subscriptionStatus to interval
       break
     default:
       console.log(`Unhandled event type ${type}`)

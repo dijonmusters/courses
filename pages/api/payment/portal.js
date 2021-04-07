@@ -1,29 +1,17 @@
+import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
-// const products = require('./products.json')
-import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0'
+import { getCourse, getUserByEmail } from 'utils/db'
 
 module.exports = withApiAuthRequired(async (req, res) => {
-  const { user } = getSession(req, res)
-  console.log(user)
-  // const { userId, stripeId } = req.body
+  const { user: { email } } = getSession(req, res);
+  const user = await getUserByEmail(email)
 
-  // // const { sessionId } = req.body
-  // // const checkoutsession = await stripe.checkout.sessions.retrieve(sessionId)
-
-  // // This is the url to which the customer will be redirected when they are done
-  // // managing their billing with the portal.
-  // const returnUrl = process.env.CLIENT_URL
-
-  // const portalsession = await stripe.billingPortal.sessions.create({
-  //   customer: stripeId,
-  //   return_url: returnUrl,
-  // })
-
-  // res.send({
-  //   url: portalsession.url,
-  // })
+  const portalsession = await stripe.billingPortal.sessions.create({
+    customer: user.stripeId,
+    return_url: process.env.CLIENT_URL,
+  })
 
   res.send({
-    user,
+    url: portalsession.url,
   })
 })

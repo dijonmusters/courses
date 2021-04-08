@@ -17,24 +17,29 @@ const menuItems = [
 
 const Nav = () => {
   const { user, error, isLoading } = useUser()
-  const {pathname } = useRouter()
-  console.log(pathname)
+  const { pathname } = useRouter()
 
   return (
     <nav className="flex-0 flex justify-between items-center py-4 px-8">
-      <h1 className={`text-6xl font-bold hover:underline hover:cursor-pointer ${pathname === '/' ? 'underline' : ''}`}>
+      <h1
+        className={`text-6xl font-bold hover:underline hover:cursor-pointer ${
+          pathname === '/' ? 'underline' : ''
+        }`}
+      >
         <Link href="/">
-          <a>
-            Courses
-          </a>
+          <a>Courses</a>
         </Link>
       </h1>
       <div className="flex-1 flex ml-8 text-xl font-light">
         {menuItems.map(({ title, slug, requiresAuth }) => {
           const showItem = !requiresAuth || (requiresAuth && user)
           return showItem ? (
-            <Link href={slug}>
-              <a className={`ml-4 hover:underline hover:cursor-pointer ${pathname === slug ? 'underline' : ''}`}>
+            <Link href={slug} key={slug}>
+              <a
+                className={`ml-4 hover:underline hover:cursor-pointer ${
+                  pathname === slug ? 'underline' : ''
+                }`}
+              >
                 {title}
               </a>
             </Link>
@@ -42,13 +47,9 @@ const Nav = () => {
         })}
       </div>
       {user ? (
-        <a href="/api/auth/logout">
-          Logout
-        </a>
+        <a href="/api/auth/logout">Logout</a>
       ) : (
-        <a href="/api/auth/login">
-          Login
-        </a>
+        <a href="/api/auth/login">Login</a>
       )}
     </nav>
   )

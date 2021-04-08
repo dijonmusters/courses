@@ -72,7 +72,6 @@ const getLessonBySlug = async (slug) => {
 }
 
 const createUser = async (email, stripeId) => {
-  console.log(`creating!! ${email}, ${stripeId}`)
   const prisma = new PrismaClient()
   const user = await prisma.user.create({
     data: { email, stripeId },
@@ -85,18 +84,18 @@ const enrolUser = async (userId, courseId) => {
   const prisma = new PrismaClient()
   const user = await prisma.user.update({
     where: {
-      id: userId
+      id: userId,
     },
     data: {
       courses: {
         connect: {
-          id: courseId
-        }
-      }
+          id: courseId,
+        },
+      },
     },
     include: {
-      courses: true
-    }
+      courses: true,
+    },
   })
   await prisma.$disconnect()
   return user
@@ -120,7 +119,7 @@ const cancelSubscription = async (stripeId) => {
   const prisma = new PrismaClient()
   const user = await prisma.user.update({
     where: {
-      stripeId
+      stripeId,
     },
     data: {
       isSubscribed: false,
@@ -130,4 +129,15 @@ const cancelSubscription = async (stripeId) => {
   return user
 }
 
-export { getCourses, getCourseBySlug, getCourse, getLessons, getLessonBySlug, createUser, getUserByEmail, enrolUser, subscribeUser, cancelSubscription }
+export {
+  getCourses,
+  getCourseBySlug,
+  getCourse,
+  getLessons,
+  getLessonBySlug,
+  createUser,
+  getUserByEmail,
+  enrolUser,
+  subscribeUser,
+  cancelSubscription,
+}

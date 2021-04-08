@@ -5,7 +5,6 @@ import Link from 'next/link'
 
 const Index = ({ courses }) => {
   const { user } = useUser()
-  console.log(user)
 
   return (
     <Container>
@@ -15,10 +14,16 @@ const Index = ({ courses }) => {
             const isFree = price === 0
 
             return (
-              <Link href={`/course/${slug}`}>
+              <Link href={`/course/${slug}`} key={slug}>
                 <a className="bg-white mx-2 my-2 text-gray-600 w-56 px-8 pt-8 pb-8 rounded-md relative">
                   <h1 className="">{title}</h1>
-                  <span className={`${isFree ? 'bg-green-200' : 'bg-pink-200'} absolute bottom-1 right-1 rounded-md py-2 px-4 text-xs`}>{isFree ? 'Free' : `$${price / 100}`}</span>
+                  <span
+                    className={`${
+                      isFree ? 'bg-green-200' : 'bg-pink-200'
+                    } absolute bottom-1 right-1 rounded-md py-2 px-4 text-xs`}
+                  >
+                    {isFree ? 'Free' : `$${price / 100}`}
+                  </span>
                 </a>
               </Link>
             )

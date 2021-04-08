@@ -33,13 +33,15 @@ async function main() {
         create: [
           {
             title: 'How do relationships work?',
-            description: 'You can model relationships in multiple ways in Prisma',
+            description:
+              'You can model relationships in multiple ways in Prisma',
             videoUrl: 'https://www.youtube.com/watch?v=PFljjv6j_YM',
             slug: 'how-do-relationships-work',
           },
           {
             title: 'Seeding data with a js file',
-            description: 'Building fake records is as easy as putting them in a seed.js file',
+            description:
+              'Building fake records is as easy as putting them in a seed.js file',
             videoUrl: 'https://www.youtube.com/watch?v=PFljjv6j_YM',
             slug: 'seeding-data-with-a-js-file',
           },
@@ -59,13 +61,15 @@ async function main() {
         create: [
           {
             title: 'Using getStaticProps to generate static content',
-            description: 'You can model relationships in multiple ways in Prisma',
+            description:
+              'You can model relationships in multiple ways in Prisma',
             videoUrl: 'https://www.youtube.com/watch?v=PFljjv6j_YM',
             slug: 'using-getstaticprops-to-generate-static-content',
           },
           {
             title: 'Using getStaticPaths to generate static pages',
-            description: 'Building fake records is as easy as putting them in a seed.js file',
+            description:
+              'Building fake records is as easy as putting them in a seed.js file',
             videoUrl: 'https://www.youtube.com/watch?v=PFljjv6j_YM',
             slug: 'using-getstaticpaths-to-generate-static-pages',
           },
@@ -85,13 +89,15 @@ async function main() {
         create: [
           {
             title: 'Fetching data with queries',
-            description: 'You can model relationships in multiple ways in Prisma',
+            description:
+              'You can model relationships in multiple ways in Prisma',
             videoUrl: 'https://www.youtube.com/watch?v=PFljjv6j_YM',
             slug: 'fetching-data-with-queries',
           },
           {
             title: 'Updating state with mutations',
-            description: 'Building fake records is as easy as putting them in a seed.js file',
+            description:
+              'Building fake records is as easy as putting them in a seed.js file',
             videoUrl: 'https://www.youtube.com/watch?v=PFljjv6j_YM',
             slug: 'updating-state-with-mutations',
           },

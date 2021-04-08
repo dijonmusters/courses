@@ -7,8 +7,6 @@ import { loadPortal } from 'utils/payment'
 import { PrismaClient } from '@prisma/client'
 
 const DashboardPage = ({ plans, dbUser }) => {
-  console.log(plans)
-  console.log(dbUser)
   return (
     <Container>
       <div className="bg-white w-full text-gray-600 p-8">
@@ -18,13 +16,16 @@ const DashboardPage = ({ plans, dbUser }) => {
         ) : (
           <p className="mx-4">You do not have a subscription</p>
         )}
-        <button className="mx-4 bg-blue-400 text-white px-4 py-2 rounded mt-2" onClick={loadPortal}>Manage subscription</button>
+        <button
+          className="mx-4 bg-blue-400 text-white px-4 py-2 rounded mt-2"
+          onClick={loadPortal}
+        >
+          Manage subscription
+        </button>
         <h2 className="text-3xl font-md mt-4 mb-2">Purchased courses</h2>
         {dbUser.courses.map(({ title, slug }) => (
-          <Link href={`/${slug}`}>
-            <a className="mx-4">
-              {title}
-            </a>
+          <Link href={`/${slug}`} key={slug}>
+            <a className="mx-4">{title}</a>
           </Link>
         ))}
       </div>
@@ -33,8 +34,10 @@ const DashboardPage = ({ plans, dbUser }) => {
 }
 
 export const getServerSideProps = withPageAuthRequired({
-  async getServerSideProps({req, params}) {
-    const { user: { email } } = await getSession(req)
+  async getServerSideProps({ req, params }) {
+    const {
+      user: { email },
+    } = await getSession(req)
 
     const prisma = new PrismaClient()
 
@@ -51,7 +54,7 @@ export const getServerSideProps = withPageAuthRequired({
 
     return {
       props: {
-        dbUser: JSON.parse(JSON.stringify(dbUser))
+        dbUser: JSON.parse(JSON.stringify(dbUser)),
       },
     }
   },

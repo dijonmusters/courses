@@ -1,10 +1,12 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
-import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
+import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0'
 import { getUserByEmail } from 'utils/db'
 
 module.exports = withApiAuthRequired(async (req, res) => {
   const { priceId } = req.query
-  const { user: { email } } = getSession(req, res);
+  const {
+    user: { email },
+  } = getSession(req, res)
   const user = await getUserByEmail(email)
 
   const lineItems = [

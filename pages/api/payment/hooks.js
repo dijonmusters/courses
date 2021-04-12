@@ -1,38 +1,86 @@
-import { enrolUser, subscribeUser, cancelSubscription } from 'utils/db'
+// pages/api/stripe-hooks
 
-module.exports = async (req, res) => {
-  const { type } = req.body
+import initStripe from 'stripe'
+import { buffer } from 'micro'
+import { PrismaClient } from '@prisma/client'
 
-  switch (type) {
+const stripe = initStripe(process.env.STRIPE_SECRET_KEY)
+const prisma = new PrismaClient()
+
+export const config = { api: { bodyParser: false } }
+
+export default async (req, res) => {
+  const reqBuffer = await buffer(req)
+  const signature = req.headers['stripe-signature']
+  const signingSecret = process.env.STRIPE_SIGNING_SECRET
+
+  let event
+
+  try {
+    event = stripe.webhooks.constructEvent(reqBuffer, signature, signingSecret)
+  } catch (err) {
+    console.log(err)
+    return res.status(400).send(`Webhook Error: ${err.message}`)
+  }
+
+  const { metadata } = event.data.object
+  const stripeId = event.data.object.customer
+
+  switch (event.type) {
     case 'charge.succeeded':
-      const { userId, courseId } = req?.body?.data?.object?.metadata
-      if (courseId) {
-        const enrolledUser = await enrolUser(
-          parseInt(userId),
-          parseInt(courseId)
-        )
-        console.log(
-          `${enrolledUser.email} enrolled in ${
-            enrolledUser.courses.find((c) => c.id === parseInt(courseId)).title
-          }`
-        )
-        break
+      if (metadata?.userId && metadata?.courseId) {
+        const user = await prisma.user.update({
+          where: {
+            id: parseInt(metadata.userId),
+          },
+          data: {
+            courses: {
+              connect: {
+                id: parseInt(metadata.courseId),
+              },
+            },
+          },
+        })
       }
+      break
     case 'customer.subscription.created':
-      const subscribedUser = await subscribeUser(
-        req?.body?.data?.object?.customer
-      )
-      console.log(`${subscribedUser.email} subscribed`)
+      if (stripeId) {
+        await prisma.user.update({
+          where: {
+            stripeId,
+          },
+          data: {
+            isSubscribed: true,
+          },
+        })
+      }
+      break
+    case 'customer.subscription.updated':
+      if (stripeId) {
+        await prisma.user.update({
+          where: {
+            stripeId,
+          },
+          data: {
+            isSubscribed: true,
+          },
+        })
+      }
       break
     case 'customer.subscription.deleted':
-      const cancelledUser = await cancelSubscription(
-        req?.body?.data?.object?.customer
-      )
-      console.log(`${cancelledUser.email} subscription expired`)
-
+      if (stripeId) {
+        await prisma.user.update({
+          where: {
+            stripeId,
+          },
+          data: {
+            isSubscribed: false,
+          },
+        })
+      }
       break
     default:
-      console.log(`Unhandled event type ${type}`)
+      console.log(`Unhandled event type ${event.type}`)
   }
 
   res.send({ received: true })

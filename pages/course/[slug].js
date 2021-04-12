@@ -43,6 +43,8 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   const { slug } = params
 
+  console.log(slug)
+
   const course = await getCourseBySlug(slug)
 
   return {

@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  id           Int           @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   email        String        @unique
   stripeId     String        @unique
   createdAt    DateTime      @default(now())

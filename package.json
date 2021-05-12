@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.2.4",
-    "postcss": "^8.2.6",
+    "postcss": "^8.2.10",
     "prisma": "^2.18.0",
     "tailwindcss": "^2.0.3"
   }

@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/dijonmusters/courses#readme",
   "dependencies": {
-    "@auth0/nextjs-auth0": "^1.2.0",
+    "@auth0/nextjs-auth0": "^1.6.2",
     "@prisma/client": "^2.18.0",
     "@stripe/stripe-js": "^1.13.1",
     "axios": "^0.21.1",
